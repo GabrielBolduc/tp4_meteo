@@ -12,10 +12,8 @@ namespace MeteoWPF.Data
         public DbSet<Region> Regions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // Récupère le chemin du dossier utilisateur (ex: C:\Users\TonNom)
+        { 
             var folder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            // On nomme la BD "meteo_app.db"
             var dbPath = Path.Combine(folder, "meteo_app.db");
 
             optionsBuilder.UseSqlite($"Data Source={dbPath}");
@@ -23,11 +21,9 @@ namespace MeteoWPF.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuration de base
             base.OnModelCreating(modelBuilder);
 
-            // SEEDING : On ajoute la ville par défaut si la BD est vide
-            // J'utilise Shawinigan comme exemple (tiré de ton énoncé)
+            // seed
             modelBuilder.Entity<Region>().HasData(
                 new Region
                 {
