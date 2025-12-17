@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MeteoWPF.Models;
-using System.Linq;
 
 namespace MeteoWPF.Services
 {
@@ -20,10 +19,7 @@ namespace MeteoWPF.Services
 
         public async Task<List<PrevisionData>> GetPrevisionsAsync(double latitude, double longitude, string apiKey)
         {
-            if (apiKey == "DEMO" || string.IsNullOrEmpty(apiKey))
-            {
-                return GenerateMockData();
-            }
+            if (apiKey == "DEMO" || string.IsNullOrEmpty(apiKey)) return GenerateMockData();
 
             string url = $"{BASE_URL}?lat={latitude}&lon={longitude}&key={apiKey}&days=7&lang=fr";
 
@@ -31,17 +27,12 @@ namespace MeteoWPF.Services
             {
                 var response = await _httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-
                 var json = await response.Content.ReadAsStringAsync();
-
-                // Désérialisation
                 var weatherData = JsonSerializer.Deserialize<WeatherResponse>(json);
-
                 return weatherData?.Data ?? new List<PrevisionData>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                System.Diagnostics.Debug.WriteLine($"Erreur API: {ex.Message}");
                 return null;
             }
         }
@@ -50,7 +41,6 @@ namespace MeteoWPF.Services
         {
             var liste = new List<PrevisionData>();
             var today = DateTime.Now;
-
             for (int i = 0; i < 7; i++)
             {
                 liste.Add(new PrevisionData
@@ -58,11 +48,7 @@ namespace MeteoWPF.Services
                     Date = today.AddDays(i).ToString("yyyy-MM-dd"),
                     HighTemp = 20 + i,
                     LowTemp = 10 + i,
-                    Weather = new WeatherDescription
-                    {
-                        Description = (i % 2 == 0) ? "Ensoleillé" : "Nuageux",
-                        IconCode = (i % 2 == 0) ? "c01d" : "c02d"
-                    }
+                    Weather = new WeatherDescription { Description = "Test", IconCode = "c01d" }
                 });
             }
             return liste;

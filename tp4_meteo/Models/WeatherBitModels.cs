@@ -12,10 +12,9 @@ namespace MeteoWPF.Models
         public string CityName { get; set; }
     }
 
-    // Une prévision pour un jour spécifique
     public class PrevisionData
     {
-        [JsonPropertyName("valid_date")] // YYYY-MM-DD
+        [JsonPropertyName("valid_date")]
         public string Date { get; set; }
 
         [JsonPropertyName("high_temp")]
@@ -28,13 +27,12 @@ namespace MeteoWPF.Models
         public WeatherDescription Weather { get; set; }
     }
 
-    // Description du temps (icone, texte)
     public class WeatherDescription
     {
         [JsonPropertyName("description")]
         public string Description { get; set; }
 
         [JsonPropertyName("icon")]
-        public string IconCode { get; set; } 
+        public string IconCode { get; set; }
     }
 }
