@@ -3,12 +3,20 @@ using System.Text.Json.Serialization;
 
 namespace tp4_meteo.Models
 {
+
     public class WeatherResponse
     {
         [JsonPropertyName("data")]
         public List<PrevisionData> Data { get; set; }
+
+        [JsonPropertyName("city_name")]
+        public string CityName { get; set; }
+
+        [JsonPropertyName("country_code")]
+        public string CountryCode { get; set; }
     }
 
+   // jour prevision
     public class PrevisionData
     {
         [JsonPropertyName("valid_date")]
@@ -24,6 +32,7 @@ namespace tp4_meteo.Models
         public WeatherDescription Weather { get; set; }
     }
 
+    // pour description mais pas utilser dans mes views 
     public class WeatherDescription
     {
         [JsonPropertyName("description")]
@@ -31,5 +40,7 @@ namespace tp4_meteo.Models
 
         [JsonPropertyName("icon")]
         public string IconCode { get; set; }
+
+        public string IconUrl => $"https://www.weatherbit.io/static/img/icons/{IconCode}.png";
     }
 }

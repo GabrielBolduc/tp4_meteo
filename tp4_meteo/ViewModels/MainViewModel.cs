@@ -11,7 +11,6 @@ namespace tp4_meteo.ViewModels
         public SettingsViewModel SettingsVM { get; }
         public ICommand OpenSettingsCommand { get; }
 
-        // Constructeur par défaut utilisé par le XAML
         public MainViewModel() : this(
             Bootstrapper.Container.Resolve<IWindowService>(),
             Bootstrapper.Container.Resolve<WeatherViewModel>(),
