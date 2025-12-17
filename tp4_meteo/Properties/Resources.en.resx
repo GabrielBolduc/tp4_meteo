@@ -132,6 +132,15 @@
   <data name="BtnSave" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="ErrorApiKey" xml:space="preserve">
+    <value>Missing or invalid API Key.</value>
+  </data>
+  <data name="ErrorInput" xml:space="preserve">
+    <value>Invalid input. Check format.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="LabelApiKey" xml:space="preserve">
     <value>API Key</value>
   </data>
@@ -155,5 +164,8 @@
   </data>
   <data name="MsgRestart" xml:space="preserve">
     <value>The application will restart to apply the new language.</value>
+  </data>
+  <data name="WarningTitle" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>

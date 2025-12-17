@@ -132,6 +132,15 @@
   <data name="BtnSave" xml:space="preserve">
     <value>Sauvegarder</value>
   </data>
+  <data name="ErrorApiKey" xml:space="preserve">
+    <value>Clé API manquante ou invalide.</value>
+  </data>
+  <data name="ErrorInput" xml:space="preserve">
+    <value>Entrées invalides. Vérifiez le format.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>ErrorTitle</value>
+  </data>
   <data name="LabelApiKey" xml:space="preserve">
     <value>Clé API :</value>
   </data>
@@ -155,5 +164,8 @@
   </data>
   <data name="MsgRestart" xml:space="preserve">
     <value>L'application va redémarrer pour appliquer la nouvelle langue.</value>
+  </data>
+  <data name="WarningTitle" xml:space="preserve">
+    <value>Attention</value>
   </data>
 </root>

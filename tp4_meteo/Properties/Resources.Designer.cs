@@ -106,6 +106,33 @@ namespace tp4_meteo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clé API manquante ou invalide..
+        /// </summary>
+        public static string ErrorApiKey {
+            get {
+                return ResourceManager.GetString("ErrorApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrées invalides. Vérifiez le format..
+        /// </summary>
+        public static string ErrorInput {
+            get {
+                return ResourceManager.GetString("ErrorInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ErrorTitle.
+        /// </summary>
+        public static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clé API :.
         /// </summary>
         public static string LabelApiKey {
@@ -174,6 +201,15 @@ namespace tp4_meteo.Properties {
         public static string MsgRestart {
             get {
                 return ResourceManager.GetString("MsgRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attention.
+        /// </summary>
+        public static string WarningTitle {
+            get {
+                return ResourceManager.GetString("WarningTitle", resourceCulture);
             }
         }
     }
