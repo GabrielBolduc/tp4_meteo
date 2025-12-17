@@ -1,9 +1,9 @@
 ﻿<Application x:Class="tp4_meteo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:tp4_meteo"
-             StartupUri="MainWindow.xaml">
+             xmlns:conv="clr-namespace:tp4_meteo.Views.Converters" 
+             StartupUri="Views/MainView.xaml">
     <Application.Resources>
-         
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Application.Resources>
 </Application>

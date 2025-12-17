@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MeteoWPF.ViewModels
+namespace tp4_meteo.ViewModels.Commands
 {
     public class RelayCommand : ICommand
     {
@@ -21,5 +21,6 @@ namespace MeteoWPF.ViewModels
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+        public void RaiseCanExecuteChanged() => CommandManager.InvalidateRequerySuggested();
     }
 }

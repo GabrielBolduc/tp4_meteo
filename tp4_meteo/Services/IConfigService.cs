@@ -1,4 +1,4 @@
-﻿namespace MeteoWPF.Services
+﻿namespace tp4_meteo.Services
 {
     public interface IConfigService
     {

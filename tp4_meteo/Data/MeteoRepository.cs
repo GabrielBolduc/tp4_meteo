@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MeteoWPF.Models;
+using tp4_meteo.Models;
 
-namespace MeteoWPF.Data
+namespace tp4_meteo.Data
 {
     public class MeteoRepository : IMeteoRepository
     {
@@ -13,10 +13,7 @@ namespace MeteoWPF.Data
             _context = context;
         }
 
-        public IEnumerable<Region> GetAllRegions()
-        {
-            return _context.Regions.ToList();
-        }
+        public IEnumerable<Region> GetAllRegions() => _context.Regions.ToList();
 
         public void AddRegion(Region region)
         {

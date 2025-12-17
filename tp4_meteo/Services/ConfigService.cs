@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using System.Text.Json;
 
-namespace MeteoWPF.Services
+namespace tp4_meteo.Services
 {
     public class ConfigData
     {
-        public string ApiKey { get; set; } = "DEMO";
+        public string ApiKey { get; set; } = "";
         public string Language { get; set; } = "fr";
-        public bool IsDarkTheme { get; set; }
     }
 
     public class RootConfig
@@ -17,14 +16,10 @@ namespace MeteoWPF.Services
 
     public class ConfigService : IConfigService
     {
-        private readonly string _filePath;
+        private readonly string _filePath = "appsettings.json";
         private RootConfig _root;
 
-        public ConfigService()
-        {
-            _filePath = "appsettings.json";
-            Load();
-        }
+        public ConfigService() => Load();
 
         public string ApiKey
         {
@@ -43,7 +38,7 @@ namespace MeteoWPF.Services
             if (File.Exists(_filePath))
             {
                 var json = File.ReadAllText(_filePath);
-                _root = JsonSerializer.Deserialize<RootConfig>(json);
+                _root = JsonSerializer.Deserialize<RootConfig>(json) ?? new RootConfig { AppSettings = new ConfigData() };
             }
             else
             {

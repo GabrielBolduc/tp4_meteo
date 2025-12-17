@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MeteoWPF.Models;
+using tp4_meteo.Models;
 
-namespace MeteoWPF.Data
+namespace tp4_meteo.Data
 {
     public interface IMeteoRepository
     {

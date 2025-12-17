@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MeteoWPF.Models;
+using tp4_meteo.Models;
 
-namespace MeteoWPF.Services
+namespace tp4_meteo.Services
 {
     public interface IMeteoService
     {
-        // On demande une liste de prévisions pour une latitude/longitude donnée
         Task<List<PrevisionData>> GetPrevisionsAsync(double latitude, double longitude, string apiKey);
     }
 }

@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace MeteoWPF.Models
+namespace tp4_meteo.Models
 {
     public class WeatherResponse
     {
         [JsonPropertyName("data")]
         public List<PrevisionData> Data { get; set; }
-
-        [JsonPropertyName("city_name")]
-        public string CityName { get; set; }
     }
 
     public class PrevisionData
