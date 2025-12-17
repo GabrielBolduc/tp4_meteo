@@ -7,24 +7,13 @@ namespace tp4_meteo.ViewModels.Commands
     public class AsyncCommand : ICommand
     {
         private readonly Func<Task> _execute;
-        private readonly Func<bool> _canExecute;
+        private readonly Predicate<object> _canExecute;
         private bool _isExecuting;
 
-        public AsyncCommand(Func<Task> execute, Func<bool> canExecute = null)
+        public AsyncCommand(Func<Task> execute, Predicate<object> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter) => !_isExecuting && (_canExecute?.Invoke() ?? true);
-
-        public async void Execute(object parameter)
-        {
-            if (!CanExecute(parameter)) return;
-            _isExecuting = true;
-            RaiseCanExecuteChanged();
-            try { await _execute(); }
-            finally { _isExecuting = false; RaiseCanExecuteChanged(); }
         }
 
         public event EventHandler CanExecuteChanged
@@ -32,6 +21,31 @@ namespace tp4_meteo.ViewModels.Commands
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
-        public void RaiseCanExecuteChanged() => CommandManager.InvalidateRequerySuggested();
+
+        public bool CanExecute(object parameter)
+        {
+            return !_isExecuting && (_canExecute == null || _canExecute(parameter));
+        }
+
+        public async void Execute(object parameter)
+        {
+            if (CanExecute(parameter))
+            {
+                try
+                {
+                    _isExecuting = true;
+                    await ExecuteAsync();
+                }
+                finally
+                {
+                    _isExecuting = false;
+                }
+            }
+        }
+
+        public Task ExecuteAsync()
+        {
+            return _execute();
+        }
     }
 }
