@@ -48,7 +48,6 @@ namespace tp4_meteo.ViewModels
         public RelayCommand AddRegionCommand { get; }
         public RelayCommand DeleteRegionCommand { get; }
 
-        // --- Constructeur ---
         public WeatherViewModel(IMeteoRepository repository, IMeteoService meteoService, IConfigService configService)
         {
             _repository = repository;

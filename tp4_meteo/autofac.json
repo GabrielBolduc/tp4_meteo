@@ -1,0 +1,30 @@
+{
+  "defaultAssembly": "tp4_meteo",
+  "components": [
+    {
+      "type": "tp4_meteo.Services.ConfigService",
+      "services": [ { "type": "tp4_meteo.Services.IConfigService" } ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "tp4_meteo.Data.MeteoRepository",
+      "services": [ { "type": "tp4_meteo.Data.IMeteoRepository" } ]
+    },
+    {
+      "type": "tp4_meteo.Services.WeatherBitService",
+      "services": [ { "type": "tp4_meteo.Services.IMeteoService" } ]
+    },
+    {
+      "type": "tp4_meteo.Data.MeteoDbContext"
+    },
+    {
+      "type": "tp4_meteo.ViewModels.MainViewModel"
+    },
+    {
+      "type": "tp4_meteo.ViewModels.WeatherViewModel"
+    },
+    {
+      "type": "tp4_meteo.ViewModels.SettingsViewModel"
+    }
+  ]
+}

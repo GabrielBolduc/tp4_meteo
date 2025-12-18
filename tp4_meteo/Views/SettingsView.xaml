@@ -5,7 +5,8 @@
         xmlns:p="clr-namespace:tp4_meteo.Properties"
         
         Title="{x:Static p:Resources.MenuConfig}" Height="250" Width="400"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Icon="/NSIS/icon.ico">
 
     <StackPanel Margin="20">
 

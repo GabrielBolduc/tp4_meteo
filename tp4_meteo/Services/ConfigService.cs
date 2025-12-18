@@ -16,10 +16,19 @@ namespace tp4_meteo.Services
 
     public class ConfigService : IConfigService
     {
-        private readonly string _filePath = "appsettings.json";
+        private readonly string _folderPath;
+        private readonly string _userFilePath;
+        private readonly string _defaultFilePath = "appsettings.json";
         private RootConfig _root;
 
-        public ConfigService() => Load();
+        public ConfigService()
+        {
+            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            _folderPath = Path.Combine(appData, "MeteoTP4");
+            _userFilePath = Path.Combine(_folderPath, "user_config.json");
+
+            Load();
+        }
 
         public string ApiKey
         {
@@ -35,12 +44,28 @@ namespace tp4_meteo.Services
 
         private void Load()
         {
-            if (File.Exists(_filePath))
+            // empeche le crash dans l'installeur
+            if (File.Exists(_userFilePath))
             {
-                var json = File.ReadAllText(_filePath);
-                _root = JsonSerializer.Deserialize<RootConfig>(json) ?? new RootConfig { AppSettings = new ConfigData() };
+                try
+                {
+                    var json = File.ReadAllText(_userFilePath);
+                    _root = JsonSerializer.Deserialize<RootConfig>(json);
+                }
+                catch { }
             }
-            else
+
+            if (_root == null && File.Exists(_defaultFilePath))
+            {
+                try
+                {
+                    var json = File.ReadAllText(_defaultFilePath);
+                    _root = JsonSerializer.Deserialize<RootConfig>(json);
+                }
+                catch { }
+            }
+
+            if (_root == null)
             {
                 _root = new RootConfig { AppSettings = new ConfigData() };
             }
@@ -48,9 +73,23 @@ namespace tp4_meteo.Services
 
         public void Save()
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(_root, options);
-            File.WriteAllText(_filePath, json);
+            try
+            {
+                if (!Directory.Exists(_folderPath))
+                {
+                    Directory.CreateDirectory(_folderPath);
+                }
+
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var json = JsonSerializer.Serialize(_root, options);
+
+                
+                File.WriteAllText(_userFilePath, json);
+            }
+            catch (Exception)
+            {
+                // empeche le crash 
+            }
         }
     }
 }

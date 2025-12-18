@@ -90,7 +90,7 @@
                         <GridView>
                             <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="110"/>
 
-                            <GridViewColumn Header="Ciel" Width="60">
+                            <GridViewColumn Width="60">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Image Source="{Binding Weather.IconUrl}" Width="35" Height="35"/>
@@ -103,7 +103,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-
+                
 
             </Grid>
         </Grid>

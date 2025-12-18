@@ -1,10 +1,10 @@
 ﻿using Autofac;
+using Autofac.Configuration;
+using Microsoft.Extensions.Configuration;
 using System.Globalization;
-using System.Reflection;
-using System.Threading; // <--- Ajout
+using System.Threading;
 using tp4_meteo.Data;
 using tp4_meteo.Services;
-using System.Linq;
 
 namespace tp4_meteo
 {
@@ -23,16 +23,23 @@ namespace tp4_meteo
 
         private static void BuildContainer()
         {
-            // (Ton code existant pour la BD et le Builder ne change pas)
-            using (var context = new MeteoDbContext()) { context.Database.EnsureCreated(); }
+            // initalisation bd
+            using (var context = new MeteoDbContext())
+            {
+                context.Database.EnsureCreated();
+            }
+
             var builder = new ContainerBuilder();
-            builder.RegisterType<ConfigService>().As<IConfigService>().SingleInstance();
-            builder.RegisterType<WindowService>().As<IWindowService>();
-            builder.RegisterType<MeteoDbContext>().AsSelf();
-            builder.RegisterType<MeteoRepository>().As<IMeteoRepository>();
-            builder.RegisterType<WeatherBitService>().As<IMeteoService>();
-            var assembly = Assembly.GetExecutingAssembly();
-            builder.RegisterAssemblyTypes(assembly).Where(t => t.Name.EndsWith("ViewModel")).AsSelf();
+
+            // config pour lire le fichier JSON autofac
+            var configBuilder = new ConfigurationBuilder();
+            configBuilder.AddJsonFile("autofac.json", optional: false, reloadOnChange: true);
+
+            var configuration = configBuilder.Build();
+            var configModule = new ConfigurationModule(configuration);
+
+            builder.RegisterModule(configModule);
+
             _container = builder.Build();
         }
 
@@ -46,12 +53,11 @@ namespace tp4_meteo
                 try
                 {
                     var culture = new CultureInfo(lang);
-                    // Applique la culture aux Threads
+
+                    // appliquer culture 
                     Thread.CurrentThread.CurrentCulture = culture;
                     Thread.CurrentThread.CurrentUICulture = culture;
 
-                    // AJOUT IMPORTANT POUR LE FICHIER PROPERTIES STANDARD
-                    // Il faut dire explicitement au gestionnaire de ressources de changer sa culture
                     tp4_meteo.Properties.Resources.Culture = culture;
                 }
                 catch { }

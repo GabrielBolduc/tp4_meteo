@@ -4,18 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tp4_meteo.Views"
-        xmlns:vm="clr-namespace:tp4_meteo.ViewModels"
-        
         xmlns:p="clr-namespace:tp4_meteo.Properties"
-        
         mc:Ignorable="d"
         Title="{x:Static p:Resources.AppTitle}" 
-        Height="520" Width="880"
-        WindowStartupLocation="CenterScreen">
+        Height="520" 
+        Width="880"
+        WindowStartupLocation="CenterScreen"
+        Icon="/NSIS/icon.ico">
 
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+    
 
     <Grid>
         <Grid.RowDefinitions>
